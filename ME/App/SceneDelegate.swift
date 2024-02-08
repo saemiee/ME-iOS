@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windonScene)
         
-        let rootVC = WorkoutViewController()
+        let rootVC = ShopViewController()
         let navVC = UINavigationController(rootViewController: rootVC)
         
         navVC.navigationBar.isHidden = true
