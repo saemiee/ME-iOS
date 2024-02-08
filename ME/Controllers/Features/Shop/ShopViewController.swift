@@ -85,7 +85,16 @@ extension ShopViewController: UICollectionViewDataSource {
 }
 
 extension ShopViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = ShopDetailViewController()
+        
+        let currentItem = productDataManager.getProductData()[indexPath.row]
+        
+        detailVC.product = currentItem
+        
+        detailVC.modalPresentationStyle = .automatic
+        present(detailVC, animated: true)
+    }
 }
 
 extension ShopViewController: UICollectionViewDelegateFlowLayout {
