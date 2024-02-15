@@ -9,18 +9,26 @@ import UIKit
 
 final class ActivityRingView: UIView {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .clear
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func draw(_ rect: CGRect) {
         let center = CGPoint(x: rect.midX, y: rect.midY)
+
+        let outerPath = UIBezierPath(arcCenter: center, radius: 65, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
         
-        let path = UIBezierPath(arcCenter: center, radius: 65, startAngle: 0, endAngle: (360 * .pi), clockwise: true)
-        let fillPath = UIColor.meOrange.withAlphaComponent(0.3)
+        let innerPath = UIBezierPath(arcCenter: center, radius: 40, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
         
-        fillPath.set()
-        path.fill()
+        outerPath.append(innerPath)
+        outerPath.usesEvenOddFillRule = true
         
-        let circle = UIBezierPath(arcCenter: center, radius: 40, startAngle: 0, endAngle: (360 * .pi), clockwise: true)
-        
-        UIColor.gray.set()
-        circle.fill()
+        UIColor.meOrange.withAlphaComponent(0.3).set()
+        outerPath.fill()
     }
 }
