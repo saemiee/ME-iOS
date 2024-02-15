@@ -68,7 +68,6 @@ final class MyView: UIView {
     }
     
     let activityRing = ActivityRingView()
-
     
     // MARK: - Initialization
     override init(frame: CGRect) {
