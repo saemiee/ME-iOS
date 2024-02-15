@@ -20,6 +20,8 @@ final class MainViewController: BaseViewController {
         $0.asFont(targetString: "새미", font: .systemFont(ofSize: 24, weight: .bold))
     }
     
+    private let myView = MyView()
+    
     private let workoutLabel = UILabel().then {
         $0.text = "운동"
         $0.textColor = .white
@@ -37,7 +39,7 @@ final class MainViewController: BaseViewController {
     
     // MARK: Add View
     override func addView() {
-        [introLabel].forEach { view.addSubview($0) }
+        [introLabel, myView].forEach { view.addSubview($0) }
     }
     
     // MARK: Layout
@@ -45,6 +47,13 @@ final class MainViewController: BaseViewController {
         introLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(173)
+            $0.height.equalTo(70)
+        }
+        
+        myView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(introLabel.snp.bottom).offset(22)
+            $0.bottom.equalToSuperview().inset(400)
         }
     }
 }
