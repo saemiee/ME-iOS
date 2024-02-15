@@ -17,4 +17,12 @@ extension UILabel {
         attributeString.addAttribute(.paragraphStyle, value: style, range: NSRange(location: 0, length: attributeString.length))
         attributedText = attributeString
     }
+    
+    func asFont(targetString: String, font: UIFont) {
+        let fullText = text ?? ""
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let range = (fullText as NSString).range(of: targetString)
+        attributedString.addAttribute(.font, value: font, range: range)
+        attributedText = attributedString
+    }
 }
