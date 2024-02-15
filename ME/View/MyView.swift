@@ -45,7 +45,11 @@ final class MyView: UIView {
         $0.textColor = .meYellow
         $0.font = .systemFont(ofSize: 14, weight: .bold)
     }
+    
+    let activityRing = ActivityRingView()
 
+    
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

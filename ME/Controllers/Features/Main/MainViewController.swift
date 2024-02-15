@@ -10,10 +10,14 @@ import UIKit
 final class MainViewController: BaseViewController {
     
     // MARK: - Properties
-    private let myLabel = UILabel().then {
-        $0.text = "MY"
+    private let introLabel = UILabel().then {
+        $0.text = "새미님\n오늘도 활기찬 하루 보내세요!"
         $0.textColor = .white
-        $0.font = .systemFont(ofSize: 22, weight: .bold)
+        $0.font = .systemFont(ofSize: 24, weight: .regular)
+        $0.numberOfLines = 2
+        $0.setLineSpacing(spacing: 5)
+        $0.textAlignment = .left
+        $0.asFont(targetString: "새미", font: .systemFont(ofSize: 24, weight: .bold))
     }
     
     private let workoutLabel = UILabel().then {
@@ -25,5 +29,22 @@ final class MainViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: Configure UI
+    override func configureUI() {
+    }
+    
+    // MARK: Add View
+    override func addView() {
+        [introLabel].forEach { view.addSubview($0) }
+    }
+    
+    // MARK: Layout
+    override func setLayout() {
+        introLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(173)
+        }
     }
 }
