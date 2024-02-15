@@ -47,6 +47,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .meBackground
     }
     
     // MARK: Configure UI
