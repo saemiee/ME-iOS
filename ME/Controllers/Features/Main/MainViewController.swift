@@ -12,42 +12,66 @@ final class MainViewController: BaseViewController {
     // MARK: - Properties
     private let introLabel = UILabel().then {
         $0.text = "새미님\n오늘도 활기찬 하루 보내세요!"
-        $0.textColor = .white
         $0.font = .systemFont(ofSize: 24, weight: .regular)
         $0.numberOfLines = 2
         $0.setLineSpacing(spacing: 5)
         $0.textAlignment = .left
         $0.asFont(targetString: "새미", font: .systemFont(ofSize: 24, weight: .bold))
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
     }
     
     private let myView = MyView()
     
     private let workoutLabel = UILabel().then {
         $0.text = "운동"
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 22, weight: .bold)
+        $0.font = .systemFont(ofSize: 20, weight: .bold)
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
     }
     
-    private let moreWorkoutButton = UIButton().then {
+    private lazy var moreWorkoutButton = UIButton().then {
         $0.setTitle("더 보기", for: .normal)
-        $0.setTitleColor(.meOrange, for: .normal)
+        $0.setTitleColor(.gray, for: .normal)
         $0.backgroundColor = .clear
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        $0.addTarget(self, action: #selector(moreWorkoutButtonTapped), for: .touchUpInside)
     }
     
-    private let workoutBackground = UIView().then {
-        $0.backgroundColor = .clear
+    private let flowLayout = UICollectionViewFlowLayout().then {
+        $0.minimumLineSpacing = 15
+        $0.minimumInteritemSpacing = 15
     }
     
-    private let workoutCard1 = WorkoutCard()
-    private let workoutCard2 = WorkoutCard()
-    private let workoutCard3 = WorkoutCard()
-    private let workoutCard4 = WorkoutCard()
+    private lazy var workoutCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout).then {
+        $0.isScrollEnabled = false
+        $0.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        $0.contentInset = .zero
+        $0.backgroundColor = .clear
+        $0.clipsToBounds = true
+    }
 
     // MARK: - Life Cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        workoutCollectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .meBackground
+        setCollectionView()
+    }
+    
+    // MARK: - Collection Setting
+    private func setCollectionView() {
+        workoutCollectionView.dataSource = self
+        workoutCollectionView.delegate = self
+        
+        workoutCollectionView.register(MainWorkoutCollectionViewCell.self, forCellWithReuseIdentifier: MainWorkoutCollectionViewCell.identifier)
+    }
+    
+    // MARK: - NavigationBar Setting
+    override func setupNavBar() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: Configure UI
@@ -56,62 +80,64 @@ final class MainViewController: BaseViewController {
     
     // MARK: Add View
     override func addView() {
-        [workoutCard1, workoutCard2, workoutCard3, workoutCard4].forEach { workoutBackground.addSubview($0)}
-        [introLabel, myView, workoutLabel, moreWorkoutButton, workoutBackground].forEach { view.addSubview($0) }
+        [introLabel, myView, workoutLabel, moreWorkoutButton, workoutCollectionView].forEach { view.addSubview($0) }
     }
     
     // MARK: Layout
     override func setLayout() {
         introLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().inset(173)
-            $0.height.equalTo(70)
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalToSuperview().inset(131)
         }
         
         myView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(introLabel.snp.bottom).offset(22)
-            $0.bottom.equalToSuperview().inset(400)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(introLabel.snp.bottom).offset(19)
+            $0.bottom.equalToSuperview().inset(480)
         }
         
         workoutLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(myView.snp.bottom).offset(52)
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(myView.snp.bottom).offset(50)
         }
         
         moreWorkoutButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(myView.snp.bottom).offset(52)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(myView.snp.bottom).offset(50)
         }
         
-        workoutBackground.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(workoutLabel.snp.bottom).offset(22)
-            $0.bottom.equalToSuperview().inset(150)
-        }
-        
-        workoutCard1.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
-            $0.trailing.equalTo(workoutBackground.snp.centerX).offset(-7)
-            $0.bottom.equalTo(workoutBackground.snp.centerY).offset(-7)
-        }
-        
-        workoutCard2.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
-            $0.leading.equalTo(workoutBackground.snp.centerX).offset(7)
-            $0.bottom.equalTo(workoutBackground.snp.centerY).offset(-7)
-        }
-        
-        workoutCard3.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview()
-            $0.trailing.equalTo(workoutBackground.snp.centerX).offset(-7)
-            $0.top.equalTo(workoutBackground.snp.centerY).offset(7)
-        }
-        
-        workoutCard4.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview()
-            $0.leading.equalTo(workoutBackground.snp.centerX).offset(7)
-            $0.top.equalTo(workoutBackground.snp.centerY).offset(7)
+        workoutCollectionView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(workoutLabel.snp.bottom).offset(20)
+            $0.bottom.equalToSuperview().inset(134)
         }
     }
+    
+    // MARK: - Selectors
+    @objc func moreWorkoutButtonTapped() {
+        let workoutVC = WorkoutViewController()
+        self.navigationController?.pushViewController(workoutVC, animated: true)
+    }
+}
+
+extension MainViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainWorkoutCollectionViewCell.identifier, for: indexPath) as! MainWorkoutCollectionViewCell
+        
+        return cell
+    }
+}
+
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      let screenWidth = UIScreen.main.bounds.width
+      let cellWidth = (screenWidth - 63) / 2
+
+      return CGSize(width: cellWidth, height: 74)
+  }
 }

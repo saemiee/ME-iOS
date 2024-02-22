@@ -14,25 +14,25 @@ final class TabBarViewController: UITabBarController {
         
         let mainVC = MainViewController()
         let shopVC = ShopViewController()
-        let settingVC = SettingViewController()
+        let myVC = SettingViewController()
     
         mainVC.title = "ME"
-        shopVC.title = "Shop"
-        settingVC.title = "설정"
+        shopVC.title = "상점"
+        myVC.title = "마이페이지"
         
         mainVC.tabBarItem.image = UIImage.init(systemName: "house")
         shopVC.tabBarItem.image = UIImage.init(systemName: "bag")
-        settingVC.tabBarItem.image = UIImage.init(systemName: "person.fill")
+        myVC.tabBarItem.image = UIImage.init(systemName: "person.fill")
         
         let navigationMain = UINavigationController(rootViewController: mainVC)
         let navigationShop = UINavigationController(rootViewController: shopVC)
-        let navigationSetting = UINavigationController(rootViewController: settingVC)
+        let navigationMy = UINavigationController(rootViewController: myVC)
         
         navigationMain.navigationBar.prefersLargeTitles = true
         navigationShop.navigationBar.prefersLargeTitles = true
-        navigationSetting.navigationBar.prefersLargeTitles = true
+        navigationMy.navigationBar.prefersLargeTitles = true
         
-        setViewControllers([navigationMain, navigationShop, navigationSetting], animated: false)
+        setViewControllers([navigationMain, navigationShop, navigationMy], animated: false)
     }
     
     override func viewDidLayoutSubviews() {
