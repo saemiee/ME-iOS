@@ -1,8 +1,8 @@
 //
-//  WorkoutCard.swift
+//  MainWorkoutCollectionViewCell.swift
 //  ME
 //
-//  Created by 새미 on 2/15/24.
+//  Created by 새미 on 2/22/24.
 //
 
 import UIKit
@@ -10,23 +10,24 @@ import UIKit
 import SnapKit
 import Then
 
-final class WorkoutCard: UIView {
-    
+final class MainWorkoutCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
+    static let identifier = "mainWorkoutCell"
+    
     private let workoutImage = UIImageView().then {
-        $0.image = UIImage.init( systemName: "figure.open.water.swim", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
-        $0.tintColor = .yellow
+        $0.image = UIImage.init( systemName: "figure.open.water.swim", withConfiguration: UIImage.SymbolConfiguration(pointSize: 26))
+        $0.tintColor = .meGray
     }
     
-    private let workoutLabel = UILabel().then {
-        $0.textColor = .white
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    let workoutLabel = UILabel().then {
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         $0.text = "수영"
     }
     
-    private let kcalLabel = UILabel().then {
-        $0.textColor = .yellow
-        $0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+    let kcalLabel = UILabel().then {
+        $0.textColor = .meOrange
+        $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         $0.text = "1000 Kcal"
     }
     
@@ -34,7 +35,7 @@ final class WorkoutCard: UIView {
         $0.axis = .vertical
         $0.distribution = .fill
         $0.alignment = .leading
-        $0.spacing = 7
+        $0.spacing = 3
     }
     
     // MARK: - Initialization
@@ -56,27 +57,21 @@ final class WorkoutCard: UIView {
     
     // MARK: - Layout
     override func layoutSubviews() {
-        self.backgroundColor = .meGray
-        self.layer.cornerRadius = 6
+        self.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
+        self.layer.cornerRadius = 7
         self.layer.masksToBounds = true
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.meGray.cgColor
     }
     
     private func setLayout() {
         workoutImage.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(14)
+            $0.leading.equalToSuperview().inset(25)
             $0.centerY.equalToSuperview()
         }
         
-        workoutLabel.snp.makeConstraints {
-            $0.height.equalTo(14)
-        }
-                
-        kcalLabel.snp.makeConstraints {
-            $0.height.equalTo(15)
-        }
-        
         stackView.snp.makeConstraints {
-            $0.leading.equalTo(workoutImage.snp.trailing).offset(12)
+            $0.leading.equalTo(workoutImage.snp.trailing).offset(15)
             $0.centerY.equalToSuperview()
         }
     }

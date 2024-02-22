@@ -15,14 +15,14 @@ final class MyView: UIView {
     // MARK: - Properties
     private let kcalLabel = UILabel().then {
         $0.text = "활동량"
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 14, weight: .regular)
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
     }
     
     let kcal = UILabel().then {
         $0.text = "300 Kcal"
-        $0.textColor = .meYellow
-        $0.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.textColor = .meOrange
+        $0.font = .systemFont(ofSize: 18, weight: .bold)
     }
     
     private lazy var kcalStackView = UIStackView().then {
@@ -33,14 +33,14 @@ final class MyView: UIView {
     
     private let pointLabel = UILabel().then {
         $0.text = "포인트"
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 14, weight: .regular)
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
     }
     
     let point = UILabel().then {
         $0.text = "30 Point"
-        $0.textColor = .meYellow
-        $0.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.textColor = .meOrange
+        $0.font = .systemFont(ofSize: 18, weight: .bold)
     }
     
     private lazy var pointStackView = UIStackView().then {
@@ -51,13 +51,13 @@ final class MyView: UIView {
     
     private let bestWorkoutLabel = UILabel().then {
         $0.text = "가장 많이 한 운동"
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 14, weight: .regular)
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
     }
     
     let bestWorkout = UILabel().then {
         $0.text = "사이클링"
-        $0.textColor = .meYellow
+        $0.textColor = .meOrange
         $0.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
@@ -79,7 +79,7 @@ final class MyView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+        
     // MARK: - Add View
     private func addView() {
         [kcalLabel, kcal].forEach { kcalStackView.addArrangedSubview($0) }
@@ -92,49 +92,28 @@ final class MyView: UIView {
     
     // MARK: - Layout
     override func layoutSubviews() {
-        self.backgroundColor = .meGray
-        self.layer.cornerRadius = 7
+        self.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
+
+        self.layer.cornerRadius = 8
         self.layer.masksToBounds = true
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.meGray.cgColor
     }
     
     private func setLayout() {
-        kcalLabel.snp.makeConstraints {
-            $0.height.equalTo(22)
-        }
-        
-        kcal.snp.makeConstraints {
-            $0.height.equalTo(15)
-        }
-        
         kcalStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(25)
-            $0.top.equalToSuperview().inset(22)
-        }
-        
-        pointLabel.snp.makeConstraints {
-            $0.height.equalTo(22)
-        }
-        
-        point.snp.makeConstraints {
-            $0.height.equalTo(15)
+            $0.leading.equalToSuperview().inset(14)
+            $0.top.equalToSuperview().inset(19)
         }
         
         pointStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(25)
+            $0.leading.equalToSuperview().inset(14)
             $0.centerY.equalToSuperview()
         }
         
-        bestWorkoutLabel.snp.makeConstraints {
-            $0.height.equalTo(22)
-        }
-        
-        bestWorkout.snp.makeConstraints {
-            $0.height.equalTo(15)
-        }
-        
         bestWorkoutStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(25)
-            $0.bottom.equalToSuperview().inset(22)
+            $0.leading.equalToSuperview().inset(14)
+            $0.bottom.equalToSuperview().inset(19)
         }
         
         activityRing.snp.makeConstraints {
