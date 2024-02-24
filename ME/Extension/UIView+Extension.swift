@@ -1,11 +1,6 @@
 import UIKit
 
 extension UIView {
-    func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
-        clipsToBounds = true
-        layer.cornerRadius = cornerRadius
-        layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
-    }
     func setDynamicBackgroundColor(darkModeColor: UIColor, lightModeColor: UIColor) {
         self.backgroundColor = UIColor { traitCollection -> UIColor in
             if traitCollection.userInterfaceStyle == .dark {
@@ -28,4 +23,10 @@ extension UIView {
 //            }
 //        }.cgColor
 //    }
+  
+  func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
+        clipsToBounds = true
+        layer.cornerRadius = cornerRadius
+        layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+    }
 }
