@@ -16,6 +16,7 @@ struct ContentView: View {
         Rectangle()
             .padding()
             .blur(radius: 50, opaque: false)
+            .opacity(0.6)
     }
 }
 
@@ -30,9 +31,11 @@ final class VignettingView: UIView {
     }
     
     private func setupView() {
-        self.backgroundColor = .meDarkGray
+        self.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.meGray.cgColor
         
         backgroundView.view.backgroundColor = .clear
         

@@ -60,7 +60,7 @@ final class ShopDetailViewController: BaseViewController {
         $0.textAlignment = .left
     }
     
-    let buyButton = MECustomButton(frame: CGRect(x: 0, y: 0, width: 0, height: 57), title: "교환하기")
+    private let buyButton = MECustomButton(frame: CGRect(x: 0, y: 0, width: 0, height: 57), title: "교환하기")
     
     // MARK: - Life Cycle
     override func viewDidLoad() {

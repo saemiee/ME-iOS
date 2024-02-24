@@ -14,7 +14,7 @@ final class ShopViewController: BaseViewController {
     
     private let mainLabel = UILabel().then {
         $0.text = "포인트를 다양한 기프티콘으로 교환해 보세요."
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     }
     

@@ -1,10 +1,3 @@
-//
-//  UIView+Extension.swift
-//  ME
-//
-//  Created by 새미 on 2/22/24.
-//
-
 import UIKit
 
 extension UIView {
@@ -30,4 +23,10 @@ extension UIView {
 //            }
 //        }.cgColor
 //    }
+  
+  func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
+        clipsToBounds = true
+        layer.cornerRadius = cornerRadius
+        layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+    }
 }
