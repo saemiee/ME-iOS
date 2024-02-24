@@ -15,9 +15,7 @@ final class ShopCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier = "ShopCell"
     
-    let vignettingView = VignettingView().then {
-        $0.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
-    }
+    let vignettingView = VignettingView()
 
     let productImage = UIImageView()
     
