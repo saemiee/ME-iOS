@@ -15,31 +15,32 @@ final class ShopCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier = "ShopCell"
     
-    let vignettingView = VignettingView()
+    let vignettingView = VignettingView().then {
+        $0.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
+    }
 
     let productImage = UIImageView()
     
     let brandNameLabel = UILabel().then {
-        $0.textColor = .meLightGray
+        $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
         $0.font = UIFont.systemFont(ofSize: 12, weight: .light)
     }
     
     let productLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 16, weight: .light)
         $0.numberOfLines = 2
         $0.textAlignment = .left
     }
     
     let priceLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     // MARK: - Initailization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
         addView()
         setLayout()
     }
@@ -49,12 +50,12 @@ final class ShopCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Add View
-    func addView() {
+    private func addView() {
         [vignettingView, productImage, brandNameLabel, productLabel, priceLabel].forEach { self.addSubview($0) }
     }
     
     // MARK: - Layout
-    func setLayout() {
+    private func setLayout() {
         vignettingView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
