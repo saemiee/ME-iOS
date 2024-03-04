@@ -24,12 +24,12 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
     }
     
     let workoutLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     }
     
     let kcalLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         $0.textAlignment = .left
     }
@@ -50,7 +50,7 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
     // MARK: - Initailization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .meGray
+        self.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
         addView()
     }
     
@@ -70,6 +70,8 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
         
         self.layer.cornerRadius = 7
         self.clipsToBounds = true
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.meGray.cgColor
         
         circle.layer.cornerRadius = circle.frame.width / 2
         circle.layer.cornerRadius = circle.frame.height / 2

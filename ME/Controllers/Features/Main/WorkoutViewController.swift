@@ -32,7 +32,7 @@ final class WorkoutViewController: BaseViewController {
     
     private let mainLabel = UILabel().then {
         $0.text = "오늘도 운동으로 활기찬 하루를 보내보세요 !"
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     }
 
@@ -50,7 +50,17 @@ final class WorkoutViewController: BaseViewController {
     
     // MARK: - Navigation Bar Setting
     override func setupNavBar() {
-        title = "운동"
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = .clear
+        
+        navigationItem.title = "운동"
+        navigationController?.navigationBar.tintColor = .meOrange
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     // MARK: - Data Setting
