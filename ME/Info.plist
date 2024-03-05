@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>&quot;ME 사용을 위해 건강 기록에  액세스해야 합니다.&quot;</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>&quot;사용자의 건강 정보를 공유하고 상호작용하기 위해 Health 앱과 통신해야 합니다.&quot;</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>&quot;사용자의 건강 정보를 업데이트하고 최신 상태를 유지하기 위해 Health 앱과 상호작용해야 합니다.&quot;</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
