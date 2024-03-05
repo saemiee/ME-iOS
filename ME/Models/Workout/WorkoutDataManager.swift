@@ -25,7 +25,6 @@ final class WorkoutDataManager {
             Workout(workoutImage: UIImage(systemName: "figure.elliptical", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22)), workout: "일립티컬", kcal: 0, point: 0),
             Workout(workoutImage: UIImage(systemName: "figure.core.training", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22)), workout: "코어 트레이닝", kcal: 0, point: 0),
             Workout(workoutImage: UIImage(systemName: "figure.stair.stepper", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22)), workout: "스텝퍼 운동", kcal: 0, point: 0),
-            Workout(workoutImage: UIImage(systemName: "figure.dance", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22)), workout: "댄스", kcal: 0, point: 0),
             Workout(workoutImage: UIImage(systemName: "figure.strengthtraining.functional", withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), workout: "기능성 근력 강화 운동", kcal: 0, point: 0),
             Workout(workoutImage: UIImage(systemName: "figure.hiking", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22)), workout: "하이킹", kcal: 0, point: 0),
             Workout(workoutImage: UIImage(systemName: "figure.highintensity.intervaltraining", withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), workout: "고강도 인터벌 트레이닝", kcal: 0, point: 0),
