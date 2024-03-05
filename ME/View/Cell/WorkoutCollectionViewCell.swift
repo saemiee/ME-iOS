@@ -16,11 +16,11 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
     static let identifier = "workoutCell"
     
     private let circle = UIView().then {
-        $0.backgroundColor = .meDarkGray
+        $0.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .meBackground)
     }
     
     let workoutImage = UIImageView().then {
-        $0.tintColor = .meYellow
+        $0.tintColor = .meOrange
     }
     
     let workoutLabel = UILabel().then {
@@ -50,7 +50,6 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
     // MARK: - Initailization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
         addView()
     }
     
@@ -68,6 +67,7 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        self.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
         self.layer.cornerRadius = 7
         self.clipsToBounds = true
         self.layer.borderWidth = 1
