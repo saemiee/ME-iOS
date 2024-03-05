@@ -28,17 +28,17 @@ final class ShopDetailViewController: BaseViewController {
     let productImage = UIImageView()
     
     let brandLabel = UILabel().then {
-        $0.textColor = .meLightGray
+        $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
     }
     
     let productLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 22, weight: .medium)
     }
     
     let priceLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
     }
     
@@ -47,13 +47,13 @@ final class ShopDetailViewController: BaseViewController {
     }
     
     private let noticeLabel = UILabel().then {
-        $0.textColor = .meLightGray
+        $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
         $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         $0.text = "유의사항"
     }
     
     let notice = UILabel().then {
-        $0.textColor = .meLightGray
+        $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
