@@ -56,6 +56,7 @@ final class WorkoutViewController: BaseViewController {
         appearance.shadowColor = .clear
         
         navigationItem.title = "운동"
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.tintColor = .meOrange
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.standardAppearance = appearance
