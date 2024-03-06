@@ -16,7 +16,7 @@ final class CouponCollectionViewCell: UICollectionViewCell {
     
     let productImage = UIImageView()
     
-    let brandName = UILabel().then {
+    let brandNameLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 12, weight: .light)
         $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
     }
@@ -31,6 +31,7 @@ final class CouponCollectionViewCell: UICollectionViewCell {
     let expiryDateLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 12, weight: .light)
         $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
+        $0.text = "2023.12.02 ~ 2024.1202"
     }
     
     private let useButton = UseButton()
@@ -47,7 +48,7 @@ final class CouponCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Add View
     private func addView() {
-        [productImage, brandName, productLabel, expiryDateLabel, useButton].forEach { contentView.addSubview($0) }
+        [productImage, brandNameLabel, productLabel, expiryDateLabel, useButton].forEach { contentView.addSubview($0) }
     }
     
     // MARK: - Layout
@@ -59,11 +60,13 @@ final class CouponCollectionViewCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.meGray.cgColor
         
         productImage.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(22)
+            $0.leading.equalToSuperview().inset(14)
             $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(22)
+            $0.width.equalTo(47)
         }
         
-        brandName.snp.makeConstraints {
+        brandNameLabel.snp.makeConstraints {
             $0.leading.equalTo(productImage.snp.trailing).offset(14)
             $0.top.equalToSuperview().inset(15)
             $0.height.equalTo(14)
@@ -71,7 +74,7 @@ final class CouponCollectionViewCell: UICollectionViewCell {
         
         productLabel.snp.makeConstraints {
             $0.leading.equalTo(productImage.snp.trailing).offset(14)
-            $0.top.equalTo(brandName.snp.bottom).offset(5)
+            $0.top.equalTo(brandNameLabel.snp.bottom).offset(5)
             $0.height.equalTo(19)
         }
         
@@ -79,6 +82,13 @@ final class CouponCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(productImage.snp.trailing).offset(14)
             $0.bottom.equalToSuperview().inset(14)
             $0.height.equalTo(14)
+        }
+        
+        useButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(21)
+            $0.width.equalTo(80)
+            $0.height.equalTo(35)
         }
     }
 }

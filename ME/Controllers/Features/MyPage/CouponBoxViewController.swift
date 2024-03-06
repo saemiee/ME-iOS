@@ -10,18 +10,12 @@ import UIKit
 final class CouponBoxViewController: BaseViewController {
     
     // MARK: - Properties
-    private let flowLayout = UICollectionViewFlowLayout().then {
-      $0.scrollDirection = .vertical
-      $0.minimumLineSpacing = 18.0
-      $0.minimumInteritemSpacing = 0
-    }
+    var productDataManager = ProductDataManager()
     
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout).then {
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
         $0.isScrollEnabled = true
         $0.showsHorizontalScrollIndicator = false
         $0.showsVerticalScrollIndicator = true
-        $0.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        $0.contentInset = .zero
         $0.backgroundColor = .clear
         $0.clipsToBounds = true
     }
@@ -56,7 +50,7 @@ final class CouponBoxViewController: BaseViewController {
     
     // MARK: - Data Setting
     func setDatas() {
-    
+        productDataManager.makeProductData()
     }
     
     // MARK: - Collection Setting
@@ -64,7 +58,7 @@ final class CouponBoxViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(WorkoutCollectionViewCell.self, forCellWithReuseIdentifier: WorkoutCollectionViewCell.identifier)
+        collectionView.register(CouponCollectionViewCell.self, forCellWithReuseIdentifier: CouponCollectionViewCell.identifier)
     }
     
     // MARK: - Add View
@@ -84,14 +78,36 @@ final class CouponBoxViewController: BaseViewController {
 
 extension CouponBoxViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return productDataManager.getProductData().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouponCollectionViewCell.identifier, for: indexPath) as! CouponCollectionViewCell
+        
+        cell.productImage.image = productDataManager.getProductData()[indexPath.row].productImage
+        cell.brandNameLabel.text = productDataManager.getProductData()[indexPath.row].brandName
+        cell.productLabel.text = productDataManager.getProductData()[indexPath.row].productName
+    
+        return cell
     }
 }
 
 extension CouponBoxViewController: UICollectionViewDelegate {
     
 }
+
+extension CouponBoxViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 18
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenWidth = UIScreen.main.bounds.width
+        let cellWidth = screenWidth - 46
+        let cellHeight = 90.0
+        let size = CGSize(width: cellWidth, height: cellHeight)
+        
+        return size
+    }
+}
+
