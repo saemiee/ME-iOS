@@ -25,6 +25,6 @@ final class UseButton: UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         
         layer.masksToBounds = true
-        layer.cornerRadius = 20
+        layer.cornerRadius = 18
     }
 }
