@@ -27,7 +27,6 @@ class BaseViewController: UIViewController {
         appearance.backgroundColor = .clear
         appearance.shadowColor = .clear
         
-        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.tintColor = .meOrange
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.standardAppearance = appearance
