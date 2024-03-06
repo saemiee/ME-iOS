@@ -14,7 +14,7 @@ final class TabBarViewController: UITabBarController {
         
         let mainVC = MainViewController()
         let shopVC = ShopViewController()
-        let myVC = SettingViewController()
+        let myVC = MyPageViewController()
     
         mainVC.title = "ME"
         shopVC.title = "상점"
