@@ -19,7 +19,7 @@ final class MECustomButton: UIButton {
     }
     
     func setButton(withTitle title: String) {
-        backgroundColor = .meYellow
+        backgroundColor = .meOrange
         setTitle(title, for: .normal)
         setTitleColor(UIColor.black, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
