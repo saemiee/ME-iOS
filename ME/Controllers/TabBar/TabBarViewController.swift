@@ -38,7 +38,7 @@ final class TabBarViewController: UITabBarController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        tabBar.tintColor = .meYellow
+        tabBar.tintColor = .meOrange
         tabBar.backgroundColor = .clear
     }
 }
