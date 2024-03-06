@@ -75,6 +75,8 @@ final class WorkoutCollectionViewCell: UICollectionViewCell {
         
         circle.layer.cornerRadius = circle.frame.width / 2
         circle.layer.cornerRadius = circle.frame.height / 2
+        circle.layer.borderWidth = 1
+        circle.layer.borderColor = UIColor.meGray.cgColor
         
         circle.snp.makeConstraints {
             $0.width.height.equalTo(48)
