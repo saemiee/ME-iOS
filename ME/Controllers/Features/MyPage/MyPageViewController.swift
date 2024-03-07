@@ -58,7 +58,9 @@ final class MyPageViewController: BaseViewController {
         $0.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
     
-    private let withdrawalButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "탈퇴하기")
+    private lazy var withdrawalButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "탈퇴하기").then {
+        $0.addTarget(self, action: #selector(withdrawalButtonTapped), for: .touchUpInside)
+    }
     
     private let meLabel = UILabel().then {
         $0.text = "ME"
@@ -75,7 +77,7 @@ final class MyPageViewController: BaseViewController {
     }
     
     @objc func logoutButtonTapped() {
-        let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "로그아웃", style: .default)
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         
@@ -85,7 +87,13 @@ final class MyPageViewController: BaseViewController {
     }
     
     @objc func withdrawalButtonTapped() {
+        let alert = UIAlertController(title: "탙퇴하기", message: "탈퇴 시 모든 포인트가 소멸됩니다.", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "탈퇴하기", style: .default)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         
+        alert.addAction(confirm)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     
     // MARK:  - Life Cycle
