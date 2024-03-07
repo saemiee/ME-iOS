@@ -8,8 +8,10 @@
 import UIKit
 
 final class ShopDetailViewController: BaseViewController {
-
+    
     // MARK: - Properties
+    let popupVC = RedeemSuccessPopup()
+    
     var product: Product? {
         didSet {
             guard let product = product else { return }
@@ -20,7 +22,7 @@ final class ShopDetailViewController: BaseViewController {
             notice.text = product.notice
         }
     }
-
+    
     private let scrollView = UIScrollView()
     
     private let background = VignettingView()
@@ -60,7 +62,14 @@ final class ShopDetailViewController: BaseViewController {
         $0.textAlignment = .left
     }
     
-    private let buyButton = MECustomButton(frame: CGRect(x: 0, y: 0, width: 0, height: 57), title: "교환하기")
+    private lazy var buyButton = MECustomButton(frame: CGRect(x: 0, y: 0, width: 0, height: 57), title: "교환하기").then {
+        $0.addTarget(self, action: #selector(buyButtonTapped), for: .touchUpInside)
+    }
+    
+    // MARK: - Selector
+    @objc func buyButtonTapped() {
+        redeemSuccess()
+    }
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -73,7 +82,7 @@ final class ShopDetailViewController: BaseViewController {
         notice.setLineSpacing(spacing: 4)
         adjustContentSize()
     }
-
+    
     // MARK: - Contet Size
     func adjustContentSize() {
         let totalContentHeight = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + 30
@@ -85,7 +94,7 @@ final class ShopDetailViewController: BaseViewController {
         [background, productImage, brandLabel, productLabel, priceLabel, divLine, noticeLabel, notice].forEach { self.scrollView.addSubview($0) }
         [scrollView, buyButton].forEach { view.addSubview($0) }
     }
-
+    
     // MARK: - Layout
     override func setLayout() {
         scrollView.snp.makeConstraints {
@@ -143,5 +152,13 @@ final class ShopDetailViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(30)
             $0.height.equalTo(57)
         }
+    }
+    
+    // MARK: - Redeem Seccess
+    func redeemSuccess() {
+        let redeemVC = RedeemPopupViewController(product: product)
+        
+        redeemVC.modalPresentationStyle = .overFullScreen
+        present(redeemVC, animated: false)
     }
 }
