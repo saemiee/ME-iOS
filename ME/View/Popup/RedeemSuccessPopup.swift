@@ -23,13 +23,13 @@ final class RedeemSuccessPopup: UIView {
     }
     
     private let titleLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.text = "포인트 교환"
         $0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
     }
     
     private let productFrame = UIView().then {
-        $0.backgroundColor = .gray
+        $0.setDynamicBackgroundColor(darkModeColor: .meDarkGray, lightModeColor: .white)
         $0.layer.cornerRadius = 4
         $0.clipsToBounds = true
     }
@@ -41,7 +41,7 @@ final class RedeemSuccessPopup: UIView {
     }
     
     let productLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         $0.textAlignment = .left
     }
@@ -53,7 +53,7 @@ final class RedeemSuccessPopup: UIView {
     }
     
     private let myPointLabel = UILabel().then {
-        $0.textColor = .white
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.text = "내 포인트"
     }
@@ -65,13 +65,13 @@ final class RedeemSuccessPopup: UIView {
         $0.text = "160000 p"
     }
     
-    private let cancelButton = PopupButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "취소")
+    let cancelButton = PopupButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "취소")
     
     private let divLine = UIView().then {
         $0.backgroundColor = .meLightGray
     }
     
-    private let redeemButton = PopupButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "확인")
+    let redeemButton = PopupButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "확인")
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -92,7 +92,7 @@ final class RedeemSuccessPopup: UIView {
     
     // MARK: - Layout
     override func layoutSubviews() {
-        self.backgroundColor = .darkGray
+        self.backgroundColor = .meBackground
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
     }

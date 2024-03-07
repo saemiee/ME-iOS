@@ -30,7 +30,7 @@ final class PopupButton: UIButton {
     func setButton(withTitle title: String) {
         backgroundColor = .clear
         setTitle(title, for: .normal)
-        setTitleColor(UIColor.yellow, for: .normal)
+        setTitleColor(UIColor.meOrange, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
 
         self.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
