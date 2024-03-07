@@ -40,4 +40,15 @@ extension UIButton {
         borderLayer.path = path.cgPath
         layer.addSublayer(borderLayer)
     }
+    
+    func setTitleColorForMode(darkModeColor: UIColor, lightModeColor: UIColor) {
+        if #available(iOS 13.0, *) {
+            let dynamicColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                return traitCollection.userInterfaceStyle == .dark ? darkModeColor : lightModeColor
+            }
+            setTitleColor(dynamicColor, for: .normal)
+        } else {
+            setTitleColor(lightModeColor, for: .normal)
+        }
+    }
 }
