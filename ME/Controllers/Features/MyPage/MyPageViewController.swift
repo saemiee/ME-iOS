@@ -40,11 +40,12 @@ final class MyPageViewController: BaseViewController {
         $0.font = .systemFont(ofSize: 14, weight: .light)
     }
     
-    private let couponBoxButton = UIButton().then {
+    private lazy var couponBoxButton = UIButton().then {
         $0.backgroundColor = .clear
         $0.setTitle("내 쿠폰함 보기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         $0.setTitleColorForMode(darkModeColor: .white, lightModeColor: .black)
+        $0.addTarget(self, action: #selector(couponBoxButtonTapped), for: .touchUpInside)
     }
     
     private let accountLabel = UILabel().then {
@@ -64,6 +65,12 @@ final class MyPageViewController: BaseViewController {
     }
     
     private let meButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "ME 사용법")
+    
+    // MARK: - Selector
+    @objc func couponBoxButtonTapped() {
+        let couponBoxVC = CouponBoxViewController()
+        self.navigationController?.pushViewController(couponBoxVC, animated: true)
+    }
     
     // MARK:  - Life Cycle
     override func viewDidLoad() {
@@ -88,7 +95,7 @@ final class MyPageViewController: BaseViewController {
         pointView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(22)
             $0.height.equalTo(82)
-            $0.trailing.equalTo(view.snp.centerX).offset(-11)
+            $0.trailing.equalTo(view.snp.centerX).offset(-10)
             $0.top.equalTo(nameLabel.snp.bottom).offset(22)
         }
         
@@ -107,7 +114,7 @@ final class MyPageViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(22)
             $0.height.equalTo(82)
             $0.top.equalTo(nameLabel.snp.bottom).offset(22)
-            $0.leading.equalTo(view.snp.centerX).offset(11)
+            $0.leading.equalTo(view.snp.centerX).offset(10)
         }
         
         couponLabel.snp.makeConstraints {
