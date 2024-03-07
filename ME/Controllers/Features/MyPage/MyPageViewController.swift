@@ -54,7 +54,9 @@ final class MyPageViewController: BaseViewController {
         $0.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
-    private let logoutButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "로그아웃")
+    private lazy var logoutButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "로그아웃").then {
+        $0.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+    }
     
     private let withdrawalButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "탈퇴하기")
     
@@ -70,6 +72,20 @@ final class MyPageViewController: BaseViewController {
     @objc func couponBoxButtonTapped() {
         let couponBoxVC = CouponBoxViewController()
         self.navigationController?.pushViewController(couponBoxVC, animated: true)
+    }
+    
+    @objc func logoutButtonTapped() {
+        let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "로그아웃", style: .default)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(confirm)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    
+    @objc func withdrawalButtonTapped() {
+        
     }
     
     // MARK:  - Life Cycle
