@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: BaseViewController {
     
     // MARK: - Properties
-    private let introLabel = UILabel().then {
+    let introLabel = UILabel().then {
         $0.text = "새미님\n오늘도 활기찬 하루 보내세요!"
         $0.font = .systemFont(ofSize: 24, weight: .regular)
         $0.numberOfLines = 2
