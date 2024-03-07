@@ -16,9 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windonScene)
         
-        let rootVC = CouponBoxViewController()
-        
-//        let rootVC = TabBarViewController()
+        let rootVC = TabBarViewController()
         let navVC = UINavigationController(rootViewController: rootVC)
         
         navVC.navigationBar.isHidden = true
