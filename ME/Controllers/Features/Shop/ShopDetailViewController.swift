@@ -72,6 +72,11 @@ final class ShopDetailViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollView.updateContentSize()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -80,19 +85,12 @@ final class ShopDetailViewController: BaseViewController {
     override func configureUI(){
         view.backgroundColor = .meBackground
         notice.setLineSpacing(spacing: 4)
-        adjustContentSize()
-    }
-    
-    // MARK: - Contet Size
-    func adjustContentSize() {
-        let totalContentHeight = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + 30
-        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: totalContentHeight)
     }
     
     // MARK: - Add View
     override func addView() {
-        [background, productImage, brandLabel, productLabel, priceLabel, divLine, noticeLabel, notice].forEach { self.scrollView.addSubview($0) }
-        [scrollView, buyButton].forEach { view.addSubview($0) }
+        [background, productImage, brandLabel, productLabel, priceLabel, divLine, noticeLabel, notice, buyButton].forEach { self.scrollView.addSubview($0) }
+        view.addSubview(scrollView)
     }
     
     // MARK: - Layout
@@ -149,7 +147,8 @@ final class ShopDetailViewController: BaseViewController {
         
         buyButton.snp.makeConstraints {
             $0.top.equalTo(notice.snp.bottom).offset(30)
-            $0.leading.trailing.equalToSuperview().inset(30)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(340)
             $0.height.equalTo(57)
         }
     }

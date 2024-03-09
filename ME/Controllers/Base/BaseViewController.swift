@@ -14,9 +14,9 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         setDarkMode()
         setupNavBar()
-        configureUI()
         addView()
         setLayout()
     }
