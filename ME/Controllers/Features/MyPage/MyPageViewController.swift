@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 final class MyPageViewController: BaseViewController {
     
@@ -68,7 +69,9 @@ final class MyPageViewController: BaseViewController {
         $0.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
-    private let meButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "ME 사용법")
+    private lazy var meButton = MyPageButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "ME").then {
+        $0.addTarget(self, action: #selector(aboutME), for: .touchUpInside)
+    }
     
     // MARK: - Selector
     @objc func couponBoxButtonTapped() {
@@ -94,6 +97,12 @@ final class MyPageViewController: BaseViewController {
         alert.addAction(confirm)
         alert.addAction(cancel)
         present(alert, animated: true)
+    }
+    
+    @objc func aboutME() {
+        let notionURL = NSURL(string: "https://saemie.notion.site/ME-0dd666fded9740afab13823cdde84643?pvs=4")
+        let notionSafariView: SFSafariViewController = SFSafariViewController(url: notionURL! as URL)
+        self.present(notionSafariView, animated: true, completion: nil)
     }
     
     // MARK:  - Life Cycle
