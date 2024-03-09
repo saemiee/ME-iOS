@@ -23,7 +23,7 @@ final class PopupButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.addBorder(positions: [.top], color: .meLightGray, width: 1)
+        self.addBorder(positions: [.top], color: .meGray, width: 1)
     }
     
     // MARK: - Button Setting

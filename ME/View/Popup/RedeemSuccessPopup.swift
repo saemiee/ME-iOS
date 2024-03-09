@@ -68,7 +68,7 @@ final class RedeemSuccessPopup: UIView {
     let cancelButton = PopupButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "취소")
     
     private let divLine = UIView().then {
-        $0.backgroundColor = .meLightGray
+        $0.backgroundColor = .meGray
     }
     
     let redeemButton = PopupButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0), title: "확인")
