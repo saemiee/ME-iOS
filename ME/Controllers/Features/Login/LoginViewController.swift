@@ -10,11 +10,30 @@ import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
     
+    // MARK: - Properties
+    private let meLogo = UIImageView().then {
+        $0.image = UIImage(resource: .meLogo)
+    }
+    
     // MARK: - Life Cycel
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // MARK: - Add View
+    override func addView() {
+        /*loginButton].forEach { view.addSubview($0) }*/
+            view.addSubview(meLogo)
+    }
+    
+    // MARK: - Layout
+    override func setLayout() {
+        meLogo.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    // MARK: - Selectors
     @objc func loginButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
