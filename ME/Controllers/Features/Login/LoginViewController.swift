@@ -10,11 +10,65 @@ import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
     
+    // MARK: - Properties
+    private let meLogo = UIImageView().then {
+        $0.image = UIImage(resource: .meLogo)
+    }
+    
+    private let mainLabel = UILabel().then {
+        $0.text = "나를 더 건강하게 만드는 ME"
+        $0.setDynamicTextColor(darkModeColor: .white, lightModeColor: .black)
+        $0.font = .systemFont(ofSize: 17, weight: .semibold)
+    }
+    
+    private let descriptionLabel = UILabel().then {
+        $0.text = "소비한 칼로리만큼의 포인트로\n상품을 교환해 보세요!"
+        $0.numberOfLines = 2
+        $0.setLineSpacing(spacing: 3)
+        $0.font = .systemFont(ofSize: 16, weight: .regular)
+        $0.textAlignment = .center
+        $0.setDynamicTextColor(darkModeColor: .meLightGray, lightModeColor: .gray)
+    }
+    
+    private let appleLoginButton = UIButton().then {
+        $0.setImage(UIImage(resource: .appleLoginButton), for: .normal)
+    }
+    
     // MARK: - Life Cycel
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // MARK: - Add View
+    override func addView() {
+        [meLogo, mainLabel, descriptionLabel, appleLoginButton].forEach { view.addSubview($0) }
+    }
+    
+    // MARK: - Layout
+    override func setLayout() {
+        meLogo.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(280)
+        }
+        
+        mainLabel.snp.makeConstraints {
+            $0.top.equalTo(meLogo.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(24)
+        }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(mainLabel.snp.bottom).offset(18)
+        }
+        
+        appleLoginButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(74)
+        }
+    }
+    
+    // MARK: - Selectors
     @objc func loginButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
