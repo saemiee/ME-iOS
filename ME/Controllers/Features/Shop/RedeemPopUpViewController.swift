@@ -10,6 +10,7 @@ import UIKit
 final class RedeemPopupViewController: BaseViewController {
     
     let successPopupView = RedeemSuccessPopup()
+    let falsePopupView = LackOfPointsPopup()
     
     var product: Product?
     
@@ -36,18 +37,27 @@ final class RedeemPopupViewController: BaseViewController {
     
     // MARK: - Layout
     override func setLayout() {
-        view.addSubview(successPopupView)
+//        view.addSubview(successPopupView)
+//        
+//        successPopupView.snp.makeConstraints {
+//            $0.centerX.centerY.equalToSuperview()
+//            $0.height.equalTo(235)
+//            $0.width.equalTo(278)
+//        }
+        view.addSubview(falsePopupView)
         
-        successPopupView.snp.makeConstraints {
+        falsePopupView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
-            $0.height.equalTo(235)
-            $0.width.equalTo(278)
+            $0.height.equalTo(145)
+            $0.width.equalTo(262)
         }
+        
+        
     }
     
     func actionButton() {
-        successPopupView.cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-        successPopupView.redeemButton.addTarget(self, action: #selector(change), for: .touchUpInside)
+//        successPopupView.cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+//        successPopupView.redeemButton.addTarget(self, action: #selector(change), for: .touchUpInside)
     }
     
     @objc func cancel() {
